@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="blinkGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FF88" />
+      <stop offset="100%" stop-color="#7000FF" />
+    </linearGradient>
+    
+    <linearGradient id="glassLayer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.06)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.01)" />
+    </linearGradient>
+
+    <filter id="neon_glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="120" fill="#141416" />
+  
+  <rect width="504" height="504" x="4" y="4" rx="116" fill="url(#glassLayer)" stroke="rgba(255,255,255,0.05)" stroke-width="3"/>
+
+  <path d="M128 200 C200 128, 312 128, 384 200" fill="none" stroke="url(#blinkGradient)" stroke-width="12" stroke-linecap="round" opacity="0.4"/> <path d="M128 320 C200 392, 312 392, 384 320" fill="none" stroke="url(#blinkGradient)" stroke-width="12" stroke-linecap="round" opacity="0.4"/> <path d="M285 200 L165 320 L245 320 L225 390 L345 270 L265 270 Z" fill="#00FF88" filter="url(#neon_glow)"/>
+</svg>

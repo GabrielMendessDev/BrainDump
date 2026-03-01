@@ -1,0 +1,23 @@
+{
+  "name": "brain-dump",
+  "version": "1.0.0",
+  "description": "Uma aplicação de notas minimalista, elegante com design all-black",
+  "main": "sync-server.js",
+  "scripts": {
+    "sync": "node sync-server.js",
+    "start": "echo Abra index.html no navegador"
+  },
+  "dependencies": {
+    "pdfkit": "^0.13.0"
+  },
+  "keywords": [
+    "notas",
+    "notepad",
+    "minimalista",
+    "braindump",
+    "dark-mode"
+  ],
+  "author": "",
+  "license": "MIT",
+  "node": ">=14.0.0"
+}

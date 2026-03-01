@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="pt-BR">
+  <script>if(localStorage.getItem('braindump_theme')==='light')document.documentElement.classList.add('light-mode');</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brain Dump - Conheça o Criador</title>
+    <link rel="icon" type="image/svg+xml" href="blink_logo.svg" />
+    <!-- Font Awesome 6 Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #000000;
+        --bg-secondary: #0a0a0a;
+        --bg-tertiary: #1a1a1a;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --text-muted: #707070;
+        --accent: #00d4ff;
+        --accent-alt: #bb86fc;
+        --border: #2a2a2a;
+      }
+
+      :root.light-mode {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f5f5f5;
+        --bg-tertiary: #efefef;
+        --text-primary: #1a1a1a;
+        --text-secondary: #4a4a4a;
+        --text-muted: #8a8a8a;
+        --accent: #0099cc;
+        --accent-alt: #9944dd;
+        --border: #e0e0e0;
+      }
+
+      :root.light-mode body {
+        background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      }
+
+      :root.light-mode .header {
+        background: linear-gradient(135deg, rgba(220, 235, 250, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%);
+      }
+
+      :root.light-mode .cv-btn {
+        color: #ffffff;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100vh;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", sans-serif;
+        background: linear-gradient(135deg, var(--bg-primary) 0%, #0f0f0f 100%);
+        color: var(--text-primary);
+      }
+
+      .header {
+        background: linear-gradient(
+          135deg,
+          rgba(0, 20, 40, 0.5) 0%,
+          rgba(0, 0, 0, 0.5) 100%
+        );
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        padding: 20px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header h1 {
+        font-size: 28px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        margin: 0 16px;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 60px 20px;
+      }
+
+      .hero-section {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .avatar {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 80px;
+        margin: 0 auto 30px;
+        border: 3px solid var(--border);
+      }
+
+      .hero-section h1 {
+        font-size: 48px;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-section .title {
+        font-size: 20px;
+        color: var(--text-secondary);
+        margin-bottom: 32px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .social-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 14px;
+      }
+
+      .social-btn:hover {
+        border-color: var(--accent);
+        background: rgba(0, 212, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .social-btn.instagram:hover {
+        border-color: #e1306c;
+        background: rgba(225, 48, 108, 0.1);
+      }
+
+      .social-btn.linkedin:hover {
+        border-color: #0077b5;
+        background: rgba(0, 119, 181, 0.1);
+      }
+
+      .social-btn.github:hover {
+        border-color: #ffffff;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .social-btn.email:hover {
+        border-color: var(--accent);
+        background: rgba(0, 212, 255, 0.1);
+      }
+
+      .social-btn .fa-instagram {
+        color: #e1306c;
+        font-size: 18px;
+      }
+
+      .social-btn .fa-linkedin {
+        color: #0a66c2;
+        font-size: 18px;
+      }
+
+      .social-btn .fa-github {
+        color: var(--text-primary);
+        font-size: 18px;
+      }
+
+      .social-btn .fa-envelope {
+        color: var(--accent);
+        font-size: 18px;
+      }
+
+      .about-section {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 40px;
+        margin-bottom: 40px;
+      }
+
+      .about-section h2 {
+        color: var(--accent);
+        font-size: 24px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .about-section p {
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 16px;
+        font-size: 16px;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .skill-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 16px;
+        text-align: center;
+      }
+
+      .skill-card h4 {
+        color: var(--accent);
+        margin-bottom: 12px;
+        font-size: 16px;
+      }
+
+      .skill-card p {
+        color: var(--text-muted);
+        font-size: 13px;
+        margin: 0;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+
+      .stat-card {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 24px;
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 32px;
+        font-weight: bold;
+        background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 8px;
+      }
+
+      .stat-label {
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+
+      .cv-section {
+        background: var(--bg-tertiary);
+        border: 2px solid var(--accent);
+        border-radius: 12px;
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+
+      .cv-section h3 {
+        color: var(--accent);
+        font-size: 20px;
+        margin-bottom: 16px;
+      }
+
+      .cv-section p {
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+      }
+
+      .cv-btn {
+        display: inline-block;
+        padding: 12px 32px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+        color: var(--bg-primary);
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .cv-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 212, 255, 0.3);
+      }
+
+      .footer {
+        margin-top: 80px;
+        padding-top: 40px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+      }
+
+      .footer p {
+        color: var(--text-secondary);
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+
+      .footer a {
+        color: var(--accent);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer a:hover {
+        color: var(--accent-alt);
+      }
+
+      @media (max-width: 768px) {
+        .header-content {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .nav-links {
+          text-align: center;
+        }
+
+        .nav-links a {
+          margin: 0 8px;
+          font-size: 14px;
+        }
+
+        .hero-section h1 {
+          font-size: 32px;
+        }
+
+        .hero-section .title {
+          font-size: 16px;
+        }
+
+        .container {
+          padding: 32px 16px;
+        }
+
+        .avatar {
+          width: 120px;
+          height: 120px;
+          font-size: 60px;
+          margin-bottom: 20px;
+        }
+
+        .social-links {
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: center;
+        }
+
+        .social-btn {
+          padding: 10px 16px;
+          font-size: 13px;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+
+        .stat-card {
+          padding: 16px;
+        }
+
+        .stat-number {
+          font-size: 24px;
+        }
+
+        .stat-label {
+          font-size: 12px;
+        }
+
+        .about-section {
+          padding: 20px;
+        }
+
+        .about-section h2 {
+          font-size: 20px;
+        }
+
+        .about-section p {
+          font-size: 14px;
+        }
+
+        .skills-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
+
+        .skill-card {
+          padding: 12px;
+        }
+
+        .skill-card h4 {
+          font-size: 14px;
+        }
+
+        .cv-section {
+          padding: 24px;
+        }
+
+        .cv-section h3 {
+          font-size: 18px;
+        }
+
+        .cv-btn {
+          padding: 10px 24px;
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-section h1 {
+          font-size: 26px;
+        }
+
+        .social-links {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .social-btn {
+          justify-content: center;
+          width: 100%;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 8px;
+        }
+
+        .stat-number {
+          font-size: 22px;
+        }
+
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .about-section {
+          padding: 16px;
+        }
+
+        .cv-section {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1>Brain Dump</h1>
+        <nav class="nav-links">
+          <a href="start.html">Início</a>
+          <a href="index.html">App</a>
+          <a href="about.html">Sobre</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+        <h1>Gabriel Mendes</h1>
+        <p class="title">Full Stack Developer | Web Developer</p>
+
+        <!-- Social Links -->
+        <div class="social-links">
+          <a
+            href="https://www.instagram.com/gabrielmenndess/"
+            target="_blank"
+            class="social-btn instagram"
+          >
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+          <a
+            href="https://www.linkedin.com/in/gabriel-mendes-bb5571264/"
+            target="_blank"
+            class="social-btn linkedin"
+          >
+            <i class="fa-brands fa-linkedin"></i> LinkedIn
+          </a>
+          <a
+            href="https://github.com/GabrielMendessDev"
+            target="_blank"
+            class="social-btn github"
+          >
+            <i class="fa-brands fa-github"></i> GitHub
+          </a>
+          <a href="mailto:dev.gabrielmendess@gmail.com" class="social-btn email">
+            <i class="fa-solid fa-envelope"></i> Email
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats Section -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">2+</div>
+          <div class="stat-label">Anos de Experiência</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Projetos Completados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Tecnologias Dominárias</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Dedicação</div>
+        </div>
+      </div>
+
+      <!-- About Section -->
+      <div class="about-section">
+        <h2><i class="fa-solid fa-hand-wave" style="color: var(--accent)"></i> Sobre Mim</h2>
+        <p>
+          Sou um desenvolvedor web full stack apaixonado por criar soluções
+          elegantes e eficientes. Especialmente focado em desenvolvimento com
+          tecnologias modernas e boas práticas de código. Estou sempre em busca
+          de aprender novas tecnologias e melhorar minhas habilidades.
+        </p>
+        <p>
+          Acredito que a programação é sobre resolver problemas e criar
+          experiências incríveis para os usuários. Cada projeto é uma
+          oportunidade de aprender e crescer profissionalmente.
+        </p>
+
+        <h2 style="margin-top: 32px"><i class="fa-solid fa-laptop-code" style="color: var(--accent)"></i> Especialidades</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h4>Frontend</h4>
+            <p>HTML, CSS, JavaScript, React, Vue.js</p>
+          </div>
+          <div class="skill-card">
+            <h4>Backend</h4>
+            <p>Node.js, Express, Python, APIs RESTful</p>
+          </div>
+          <div class="skill-card">
+            <h4>Databases</h4>
+            <p>MongoDB, PostgreSQL, SQLite</p>
+          </div>
+          <div class="skill-card">
+            <h4>DevOps</h4>
+            <p>GitHub, Docker, Cloud Services</p>
+          </div>
+          <div class="skill-card">
+            <h4>Tools</h4>
+            <p>Git, VS Code, Figma, Terminal</p>
+          </div>
+          <div class="skill-card">
+            <h4>Métodos</h4>
+            <p>Agile, Clean Code, TDD</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CV Section -->
+      <div class="cv-section">
+        <h3><i class="fa-solid fa-file-lines" style="color: var(--accent)"></i> Currículo Profissional</h3>
+        <p>
+          Confira meu currículo detalhado com experiências, formações e
+          competências profissionais.
+        </p>
+        <a
+          href="https://www.linkedin.com/in/gabriel-mendes-bb5571264/"
+          target="_blank"
+          class="cv-btn"
+        >
+          Ver Currículo Completo
+        </a>
+      </div>
+
+      <!-- About App Section -->
+      <div class="about-section">
+        <h2><i class="fa-solid fa-palette" style="color: var(--accent)"></i> Sobre o Brain Dump</h2>
+        <p>
+          Brain Dump é um bloco de notas minimalista desenvolvido com
+          tecnologias web modernas. O projeto foi criado com foco em
+          simplicidade, elegância e eficiência.
+        </p>
+        <p>Features principais:</p>
+        <ul
+          style="
+            color: var(--text-secondary);
+            margin-left: 20px;
+            line-height: 2;
+          "
+        >
+          <li><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent)"></i> Interface minimalista e intuitiva</li>
+          <li><i class="fa-solid fa-pen-to-square" style="color: var(--accent)"></i> Editor de texto rico com formatação</li>
+          <li><i class="fa-solid fa-file-import" style="color: var(--accent)"></i> Importar notas de PDF e TXT</li>
+          <li><i class="fa-solid fa-file-export" style="color: var(--accent)"></i> Exportar notas em múltiplos formatos</li>
+          <li><i class="fa-solid fa-moon" style="color: var(--accent)"></i> Tema claro e escuro</li>
+          <li><i class="fa-solid fa-keyboard" style="color: var(--accent)"></i> Atalhos de teclado produtivos</li>
+          <li><i class="fa-solid fa-floppy-disk" style="color: var(--accent)"></i> Sincronização local com pasta</li>
+          <li><i class="fa-solid fa-mobile-screen" style="color: var(--accent)"></i> Interface responsiva</li>
+        </ul>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>
+          Desenvolvido por
+          <a href="https://www.instagram.com/gabrielmenndess/" target="_blank"
+            >Gabriel Mendes</a
+          >
+        </p>
+        <p>
+          <a
+            href="https://www.linkedin.com/in/gabriel-mendes-bb5571264/"
+            target="_blank"
+            ><i class="fa-brands fa-linkedin"></i> LinkedIn</a
+          >
+          •
+          <a href="https://github.com/GabrielMendessDev" target="_blank"
+            ><i class="fa-brands fa-github"></i> GitHub</a
+          >
+          •
+          <a href="mailto:dev.gabrielmendess@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+        </p>
+        <p style="color: var(--text-muted); margin-top: 20px; font-size: 12px">
+          © 2026 Brain Dump. Todos os direitos reservados.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

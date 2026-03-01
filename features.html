@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="pt-BR">
+  <script>if(localStorage.getItem('braindump_theme')==='light')document.documentElement.classList.add('light-mode');</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brain Dump - Guia de Recursos</title>
+    <link rel="icon" type="image/svg+xml" href="blink_logo.svg" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #000000;
+        --bg-secondary: #0a0a0a;
+        --bg-tertiary: #1a1a1a;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --text-muted: #707070;
+        --accent: #00d4ff;
+        --accent-alt: #bb86fc;
+        --border: #2a2a2a;
+      }
+
+      :root.light-mode {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f5f5f5;
+        --bg-tertiary: #efefef;
+        --text-primary: #1a1a1a;
+        --text-secondary: #4a4a4a;
+        --text-muted: #8a8a8a;
+        --accent: #0099cc;
+        --accent-alt: #9944dd;
+        --border: #e0e0e0;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        color: var(--text-primary);
+        padding: 40px 20px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-alt));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: var(--text-secondary);
+        margin-bottom: 40px;
+        font-size: 16px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .feature-card {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover {
+        border-color: var(--accent);
+        background: var(--bg-secondary);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 212, 255, 0.1);
+      }
+
+      .feature-icon {
+        font-size: 36px;
+        margin-bottom: 12px;
+      }
+
+      .feature-card h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+        color: var(--accent);
+      }
+
+      .feature-card p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      .shortcuts-section {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 40px;
+      }
+
+      .shortcuts-section h2 {
+        color: var(--accent);
+        margin-bottom: 20px;
+        font-size: 22px;
+      }
+
+      .shortcuts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+      }
+
+      .shortcut {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        background: var(--bg-secondary);
+        border-radius: 6px;
+        border: 1px solid var(--border);
+      }
+
+      .shortcut-key {
+        background: var(--border);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        color: var(--accent-alt);
+      }
+
+      .getting-started {
+        background: var(--bg-tertiary);
+        border: 2px solid var(--accent);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 40px;
+      }
+
+      .getting-started h2 {
+        color: var(--accent);
+        margin-bottom: 16px;
+      }
+
+      .step {
+        margin-bottom: 16px;
+        padding: 12px;
+        background: var(--bg-secondary);
+        border-left: 3px solid var(--accent-alt);
+        border-radius: 4px;
+      }
+
+      .step-number {
+        display: inline-block;
+        background: var(--accent-alt);
+        color: #ffffff;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 24px;
+        font-weight: bold;
+        margin-right: 8px;
+      }
+
+      .footer {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 12px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* RESPONSIVE - MOBILE */
+      @media (max-width: 768px) {
+        body {
+          padding: 24px 12px;
+        }
+
+        h1 {
+          font-size: 26px;
+        }
+
+        .subtitle {
+          font-size: 14px;
+          margin-bottom: 24px;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .feature-card {
+          padding: 16px;
+        }
+
+        .feature-icon {
+          font-size: 28px;
+          margin-bottom: 8px;
+        }
+
+        .feature-card h3 {
+          font-size: 16px;
+          margin-bottom: 8px;
+        }
+
+        .shortcuts-section {
+          padding: 16px;
+        }
+
+        .shortcuts-section h2 {
+          font-size: 18px;
+        }
+
+        .shortcuts-grid {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .shortcut {
+          padding: 10px;
+        }
+
+        .getting-started {
+          padding: 16px;
+        }
+
+        .getting-started h2 {
+          font-size: 18px;
+        }
+
+        .step {
+          padding: 10px;
+          font-size: 14px;
+        }
+
+        .footer p {
+          font-size: 11px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 16px 8px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        .feature-card {
+          padding: 12px;
+        }
+
+        .shortcuts-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Brain Dump v2.0 <i class="fa-solid fa-brain"></i></h1>
+      <p class="subtitle">Bloco de Notas Minimalista com Poderes Incríveis</p>
+
+      <!-- Featured Features -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-file-import" style="color: var(--accent)"></i></div>
+          <h3>PDF Import</h3>
+          <p>
+            Importe arquivos PDF e converta automaticamente em notas. O conteúdo
+            é extraído e armazenado como texto.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-palette" style="color: var(--accent)"></i></div>
+          <h3>Temas Dinâmicos</h3>
+          <p>
+            Alterne entre Tema Escuro (padrão) e Tema Claro. Sua preferência é
+            salva automaticamente.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-keyboard" style="color: var(--accent)"></i></div>
+          <h3>Atalhos Rápidos</h3>
+          <p>
+            Use Ctrl+B, Ctrl+I, Ctrl+U para formatação rápida e Ctrl+S para
+            exportar como .txt.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-file-export" style="color: var(--accent)"></i></div>
+          <h3>Export Avançado</h3>
+          <p>
+            Exporte notas como TXT, PDF ou sincronize com pasta local usando
+            Node.js.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-pen-fancy" style="color: var(--accent)"></i></div>
+          <h3>Editor Avançado</h3>
+          <p>
+            suporte completo a negrito, itálico, títulos, listas e blocos de
+            código.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-arrows-rotate" style="color: var(--accent)"></i></div>
+          <h3>Sincronização</h3>
+          <p>
+            Sincronize com pasta local e mantenha backup de todas suas notas de
+            forma segura.
+          </p>
+        </div>
+      </div>
+
+      <!-- Shortcuts -->
+      <div class="shortcuts-section">
+        <h2><i class="fa-solid fa-keyboard" style="color: var(--accent)"></i> Atalhos de Teclado</h2>
+        <div class="shortcuts-grid">
+          <div class="shortcut">
+            <span class="shortcut-key">Ctrl+B</span>
+            <span>Negrito</span>
+          </div>
+          <div class="shortcut">
+            <span class="shortcut-key">Ctrl+I</span>
+            <span>Itálico</span>
+          </div>
+          <div class="shortcut">
+            <span class="shortcut-key">Ctrl+U</span>
+            <span>Sublinhado</span>
+          </div>
+          <div class="shortcut">
+            <span class="shortcut-key">Ctrl+S</span>
+            <span>Exportar .txt</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Getting Started -->
+      <div class="getting-started">
+        <h2><i class="fa-solid fa-rocket" style="color: var(--accent)"></i> Começar</h2>
+
+        <h3 style="color: var(--accent-alt); margin-top: 20px; margin-bottom: 12px">
+          PDF Import
+        </h3>
+        <div class="step">
+          <span class="step-number">1</span> Clique em <strong>⋮ Menu</strong>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span> Selecione
+          <strong><i class="fa-solid fa-file-import"></i> Importar PDF</strong>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span> Escolha um PDF no seu computador
+        </div>
+        <div class="step">
+          <span class="step-number">4</span> Pronto! Uma nova nota foi criada <i class="fa-solid fa-party-horn" style="color: var(--accent)"></i>
+        </div>
+
+        <h3 style="color: var(--accent-alt); margin-top: 20px; margin-bottom: 12px">
+          Alterar Tema
+        </h3>
+        <div class="step">
+          <span class="step-number">1</span> Clique em <strong>⋮ Menu</strong>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span> Selecione
+          <strong><i class="fa-solid fa-moon"></i> Tema Escuro</strong> ou <strong><i class="fa-solid fa-sun"></i> Tema Claro</strong>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span> A interface muda instantaneamente
+        </div>
+
+        <h3 style="color: var(--accent-alt); margin-top: 20px; margin-bottom: 12px">
+          Sincronização com Pasta Local
+        </h3>
+        <div class="step">
+          <span class="step-number">1</span> Abra terminal na pasta do projeto
+        </div>
+        <div class="step">
+          <span class="step-number">2</span> Execute:
+          <code>node sync-server.js</code>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span> Pasta
+          <code>notas-backup/</code> será criada
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>
+          Brain Dump v2.0 | Desenvolvido por
+          <a
+            href="https://www.instagram.com/gabrielmenndess/"
+            target="_blank"
+            style="color: #e1306c; text-decoration: none"
+            >Gabriel Mendes</a
+          >
+        </p>
+        <p style="margin-top: 12px">
+          <a
+            href="https://www.linkedin.com/in/gabriel-mendes-bb5571264/"
+            target="_blank"
+            style="color: #0077b5; text-decoration: none; margin: 0 12px"
+            ><i class="fa-brands fa-linkedin"></i> LinkedIn</a
+          >
+          |
+          <a
+            href="https://github.com/GabrielMendessDev"
+            target="_blank"
+            style="color: var(--text-primary); text-decoration: none; margin: 0 12px"
+            ><i class="fa-brands fa-github"></i> GitHub</a
+          >
+          |
+          <a
+            href="creator.html"
+            style="color: var(--accent); text-decoration: none; margin: 0 12px"
+            ><i class="fa-solid fa-code"></i> Conheça o Criador</a
+          >
+          |
+          <a
+            href="index.html"
+            style="color: var(--accent); text-decoration: none; margin: 0 12px"
+            ><i class="fa-solid fa-arrow-left"></i> Voltar para o app</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

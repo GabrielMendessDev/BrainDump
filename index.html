@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+  <script>if(localStorage.getItem('braindump_theme')==='light')document.documentElement.classList.add('light-mode');</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brain Dump - Notas Minimalista</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- jsPDF para geração de PDF nas sincronizações -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="icon" type="image/svg+xml" href="blink_logo.svg" />
+    <!-- Font Awesome 6 Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Wrapper Principal -->
+    <div class="container">
+      <!-- Modal de Sincronização -->
+      <div id="syncModal" class="custom-modal">
+        <div class="modal-content">
+          <span id="modalClose" class="modal-close">&times;</span>
+          <div id="modalMessage"></div>
+        </div>
+      </div>
+
+      <!-- Mobile Sidebar Toggle -->
+      <button class="sidebar-toggle" id="sidebarToggle" title="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <!-- Sidebar Overlay (mobile) -->
+      <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <!-- Header Sidebar -->
+        <div class="sidebar-header">
+          <button class="sidebar-close" id="sidebarClose" title="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <h1 class="app-title">Brain Dump</h1>
+          <div class="header-controls">
+            <button class="btn-new-note" id="btnNewNote" title="Nova Nota">
+              <span>+</span>
+            </button>
+            <div class="menu-dropdown">
+              <button class="btn-menu" id="btnMenu" title="Menu">⋮</button>
+              <div class="dropdown-content" id="dropdownMenu">
+                <button id="btnImportTxt" class="menu-item">
+                  <i class="fa-solid fa-file-import fa-fw"></i> Importar .txt
+                </button>
+                <button id="btnImportPdf" class="menu-item">
+                  <i class="fa-solid fa-file-pdf fa-fw"></i> Importar PDF
+                </button>
+                <button id="btnExportAll" class="menu-item">
+                  <i class="fa-solid fa-file-export fa-fw"></i> Exportar todos
+                  .txt
+                </button>
+                <hr
+                  style="
+                    margin: 8px 0;
+                    border: none;
+                    border-top: 1px solid var(--border-light);
+                  "
+                />
+                <button id="btnExportPdf" class="menu-item">
+                  <i class="fa-solid fa-file-pdf fa-fw"></i> Exportar como PDF
+                </button>
+                <button id="btnSync" class="menu-item">
+                  <i class="fa-solid fa-folder-open fa-fw"></i> Sincronizar
+                  pasta
+                </button>
+                <button id="btnSyncSelected" class="menu-item">
+                  <i class="fa-solid fa-arrows-rotate fa-fw"></i> Sincronizar
+                  selecionadas
+                </button>
+                <button id="btnDeleteSelected" class="menu-item">
+                  <i class="fa-solid fa-trash-can fa-fw"></i> Excluir
+                  selecionadas
+                </button>
+                <hr
+                  style="
+                    margin: 8px 0;
+                    border: none;
+                    border-top: 1px solid var(--border-light);
+                  "
+                />
+                <button id="btnToggleTheme" class="menu-item">
+                  <i class="fa-solid fa-moon fa-fw" id="themeIcon"></i>
+                  <span id="themeLabel">Tema Escuro</span>
+                </button>
+                <button id="btnHelp" class="menu-item">
+                  <i class="fa-solid fa-keyboard fa-fw"></i> Atalhos
+                </button>
+                <hr
+                  style="
+                    margin: 8px 0;
+                    border: none;
+                    border-top: 1px solid var(--border-light);
+                  "
+                />
+                <a
+                  href="about.html"
+                  class="menu-item"
+                  style="text-decoration: none; display: block"
+                >
+                  <i class="fa-solid fa-circle-info fa-fw"></i> Conheça o App
+                </a>
+                <a
+                  href="features.html"
+                  class="menu-item"
+                  style="text-decoration: none; display: block"
+                >
+                  <i class="fa-solid fa-wand-magic-sparkles fa-fw"></i> Features
+                  Detalhadas
+                </a>
+                <a
+                  href="creator.html"
+                  class="menu-item"
+                  style="text-decoration: none; display: block"
+                >
+                  <i class="fa-solid fa-code fa-fw"></i> Criador
+                </a>
+                <a
+                  href="project-info.html"
+                  class="menu-item"
+                  style="text-decoration: none; display: block"
+                >
+                  <i class="fa-solid fa-diagram-project fa-fw"></i> Estrutura do
+                  Projeto
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters">
+          <button class="filter-btn active" data-category="all">Todos</button>
+          <button class="filter-btn" data-category="ideias"><i class="fa-solid fa-lightbulb fa-fw"></i> Ideias</button>
+          <button class="filter-btn" data-category="estudos"><i class="fa-solid fa-book fa-fw"></i> Estudos</button>
+          <button class="filter-btn" data-category="trabalho">
+            <i class="fa-solid fa-briefcase fa-fw"></i> Trabalho
+          </button>
+        </div>
+
+        <!-- Search -->
+        <div class="search-box">
+          <input
+            type="text"
+            id="sidebarSearch"
+            class="search-input"
+            placeholder="Buscar notas..."
+          />
+        </div>
+
+        <!-- Lista de Notas -->
+        <div class="notes-sidebar" id="notesSidebar"></div>
+        <!-- contador seleção -->
+        <div
+          id="selectionInfo"
+          style="padding: 8px 16px; font-size: 12px; color: #aaa; display: none"
+        >
+          <span id="selectedCount">0</span> notas selecionadas
+        </div>
+
+        <!-- Footer Sidebar -->
+        <div class="sidebar-footer">
+          <div class="stats">
+            <div class="stat-item">
+              <span class="stat-label">Notas</span>
+              <span class="stat-value" id="totalNotesCount">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Palavras</span>
+              <span class="stat-value" id="totalWordsCount">0</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Editor Principal -->
+      <main class="main-editor">
+        <!-- Top Bar do Editor -->
+        <div class="editor-top-bar">
+          <input
+            type="text"
+            id="noteTitle"
+            class="editor-title"
+            placeholder="Título da nota..."
+          />
+          <div class="editor-controls">
+            <select id="noteCategory" class="category-select">
+              <option value="ideias">Ideias</option>
+              <option value="estudos">Estudos</option>
+              <option value="trabalho">Trabalho</option>
+            </select>
+            <button class="btn-icon" id="btnPin" title="Fixar"><i class="fa-solid fa-thumbtack"></i></button>
+            <button class="btn-icon" id="btnDelete" title="Deletar"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </div>
+
+        <!-- Toolbar de Formatação -->
+        <div class="editor-toolbar">
+          <button class="toolbar-btn" id="btnBold" title="Negrito (Ctrl+B)">
+            <strong>B</strong>
+          </button>
+          <button class="toolbar-btn" id="btnItalic" title="Itálico (Ctrl+I)">
+            <em>I</em>
+          </button>
+          <button
+            class="toolbar-btn"
+            id="btnUnderline"
+            title="Sublinhado (Ctrl+U)"
+          >
+            <u>U</u>
+          </button>
+          <span class="toolbar-sep"></span>
+          <button class="toolbar-btn" id="btnH1" title="Título H1">H1</button>
+          <button class="toolbar-btn" id="btnH2" title="Título H2">H2</button>
+          <span class="toolbar-sep"></span>
+          <button class="toolbar-btn" id="btnUL" title="Lista com bullets">
+            • List
+          </button>
+          <button class="toolbar-btn" id="btnOL" title="Lista numerada">
+            1. List
+          </button>
+          <span class="toolbar-sep"></span>
+          <button class="toolbar-btn" id="btnCode" title="Código">
+            &lt;/&gt;
+          </button>
+          <input
+            type="file"
+            id="importTxtFile"
+            accept=".txt"
+            style="display: none"
+          />
+          <input
+            type="file"
+            id="importPdfFile"
+            accept=".pdf"
+            style="display: none"
+          />
+        </div>
+
+        <!-- Conteúdo Editor -->
+        <div class="editor-content">
+          <div
+            id="noteContent"
+            class="note-editor"
+            contenteditable="true"
+            data-placeholder="Digite sua nota aqui...&#10;&#10;Comece a capturar seus pensamentos!"
+          ></div>
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="editor-footer">
+          <span id="noteInfo" class="note-info">Nova nota • 0 palavras</span>
+          <span class="note-time" id="noteTime"></span>
+          <div
+            class="editor-credits"
+            style="
+              text-align: center;
+              margin-top: 20px;
+              padding-top: 20px;
+              border-top: 1px solid var(--border);
+              font-size: 12px;
+              color: var(--text-muted);
+            "
+          >
+            Desenvolvido por
+            <a
+              href="https://www.instagram.com/gabrielmenndess/"
+              target="_blank"
+              style="color: #e1306c; text-decoration: none; margin: 0 4px"
+              ><i class="fa-brands fa-instagram"></i> Gabriel Mendes</a
+            >
+            |
+            <a
+              href="https://www.linkedin.com/in/gabriel-mendes-bb5571264/"
+              target="_blank"
+              style="color: #0077b5; text-decoration: none; margin: 0 4px"
+              ><i class="fa-brands fa-linkedin"></i> LinkedIn</a
+            >
+            |
+            <a
+              href="https://github.com/GabrielMendessDev"
+              target="_blank"
+              style="color: var(--text-primary); text-decoration: none; margin: 0 4px"
+              ><i class="fa-brands fa-github"></i> GitHub</a
+            >
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+          <h2>Bem vindo! <i class="fa-solid fa-hand" style="color: var(--accent)"></i></h2>
+          <p>
+            Crie uma nova nota clicando no botão "+" ou selecione uma existente
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Funções básicas de modal
+      function showModal(text) {
+        const modal = document.getElementById("syncModal");
+        const msg = document.getElementById("modalMessage");
+        msg.innerHTML = text.replace(/\n/g, "<br>");
+        modal.style.display = "block";
+      }
+      function hideModal() {
+        document.getElementById("syncModal").style.display = "none";
+      }
+      document
+        .getElementById("modalClose")
+        .addEventListener("click", hideModal);
+      window.addEventListener("click", (e) => {
+        if (e.target.id === "syncModal") hideModal();
+      });
+    </script>
+  </body>
+</html>

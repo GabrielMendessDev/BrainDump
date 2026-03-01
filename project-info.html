@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="pt-BR">
+  <script>if(localStorage.getItem('braindump_theme')==='light')document.documentElement.classList.add('light-mode');</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brain Dump - Estrutura do Projeto</title>
+    <link rel="icon" type="image/svg+xml" href="blink_logo.svg" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-primary: #000000;
+        --bg-secondary: #0a0a0a;
+        --bg-tertiary: #1a1a1a;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --text-muted: #707070;
+        --accent: #00d4ff;
+        --accent-alt: #bb86fc;
+        --border: #2a2a2a;
+      }
+
+      :root.light-mode {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f5f5f5;
+        --bg-tertiary: #efefef;
+        --text-primary: #1a1a1a;
+        --text-secondary: #4a4a4a;
+        --text-muted: #8a8a8a;
+        --accent: #0099cc;
+        --accent-alt: #9944dd;
+        --border: #e0e0e0;
+      }
+
+      body {
+        font-family: "Courier New", monospace;
+        background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        color: var(--accent);
+        padding: 40px;
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        color: var(--accent-alt);
+        margin-bottom: 30px;
+        border-bottom: 2px solid var(--border);
+        padding-bottom: 15px;
+      }
+
+      h2 {
+        color: var(--accent);
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+
+      .file-tree {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 20px;
+        overflow-x: auto;
+        margin-bottom: 30px;
+      }
+
+      .file-tree code {
+        color: var(--accent);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .file-item {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 15px;
+        margin-bottom: 12px;
+      }
+
+      .file-name {
+        color: var(--accent-alt);
+        font-weight: bold;
+        margin-bottom: 8px;
+      }
+
+      .file-desc {
+        color: var(--text-secondary);
+        font-size: 13px;
+      }
+
+      .file-type {
+        display: inline-block;
+        background: var(--bg-tertiary);
+        color: var(--accent);
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: 11px;
+        margin-right: 8px;
+      }
+
+      .version-badge {
+        display: inline-block;
+        background: var(--accent-alt);
+        color: #ffffff;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+
+      .back-link {
+        display: inline-block;
+        color: var(--accent);
+        text-decoration: none;
+        margin-bottom: 20px;
+        padding: 8px 16px;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        border-color: var(--accent);
+        background: rgba(0, 212, 255, 0.1);
+      }
+
+      /* RESPONSIVE - MOBILE */
+      @media (max-width: 768px) {
+        body {
+          padding: 24px 12px;
+        }
+
+        h1 {
+          font-size: 22px;
+          margin-bottom: 20px;
+        }
+
+        h2 {
+          font-size: 18px;
+          margin-top: 24px;
+        }
+
+        .file-tree {
+          padding: 12px;
+          font-size: 12px;
+        }
+
+        .file-tree code {
+          font-size: 11px;
+          line-height: 1.5;
+          word-break: break-word;
+        }
+
+        .file-item {
+          padding: 12px;
+        }
+
+        .file-name {
+          font-size: 14px;
+        }
+
+        .file-desc {
+          font-size: 12px;
+        }
+
+        .version-badge {
+          font-size: 10px;
+          padding: 3px 8px;
+          margin-left: 4px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 16px 8px;
+        }
+
+        h1 {
+          font-size: 18px;
+        }
+
+        .file-tree {
+          padding: 10px;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .file-tree code {
+          font-size: 10px;
+          white-space: nowrap;
+        }
+
+        .file-item {
+          padding: 10px;
+          margin-bottom: 8px;
+        }
+
+        .file-type {
+          font-size: 10px;
+          padding: 1px 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="start.html" class="back-link">← Voltar</a>
+
+      <h1>
+        <i class="fa-solid fa-folder-tree"></i> Estrutura do Projeto Brain Dump
+        <span class="version-badge">v2.0.0</span>
+      </h1>
+
+      <div class="file-tree">
+        <code
+          >BLOCO DE NOTAS/<br />
+          ├── <i class="fa-solid fa-file-code" style="color: #bb86fc"></i> <strong>start.html</strong> (Página Inicial)<br />
+          ├── <i class="fa-solid fa-file-code" style="color: #bb86fc"></i> <strong>index.html</strong> (App Principal)<br />
+          ├── <i class="fa-solid fa-file-code" style="color: #bb86fc"></i> <strong>about.html</strong> (Conheça o App)<br />
+          ├── <i class="fa-solid fa-file-code" style="color: #bb86fc"></i> <strong>features.html</strong> (Features Detalhadas)<br />
+          ├── <i class="fa-solid fa-file-code" style="color: #bb86fc"></i> <strong>project-info.html</strong> (Este arquivo)<br />
+          │<br />
+          ├── <i class="fa-solid fa-palette" style="color: var(--accent)"></i> <strong>style.css</strong> (Estilos CSS)<br />
+          ├── <i class="fa-solid fa-gear" style="color: var(--accent)"></i> <strong>script.js</strong> (Lógica JavaScript)<br />
+          ├── <i class="fa-solid fa-server" style="color: var(--accent)"></i> <strong>server.js</strong> (Servidor de Teste)<br />
+          ├── <i class="fa-solid fa-arrows-rotate" style="color: var(--accent)"></i> <strong>sync-server.js</strong> (Sincronização)<br />
+          │<br />
+          ├── <i class="fa-solid fa-book" style="color: #bb86fc"></i> <strong>README.md</strong> (Documentação)<br />
+          ├── <i class="fa-solid fa-clock-rotate-left" style="color: #bb86fc"></i> <strong>CHANGELOG.md</strong> (Histórico)<br />
+          ├── <i class="fa-solid fa-flask" style="color: #bb86fc"></i> <strong>TESTING.md</strong> (Guia de Testes)<br />
+          ├── <i class="fa-solid fa-box" style="color: #bb86fc"></i> <strong>package.json</strong> (Metadados)<br />
+          └── <i class="fa-solid fa-folder" style="color: var(--accent)"></i> <strong>notas-backup/</strong> (Gerado - Sincronização)
+        </code>
+      </div>
+
+      <h2><i class="fa-solid fa-book-open"></i> Descrição dos Arquivos</h2>
+
+      <!-- HTML Files -->
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">HTML</span>start.html
+        </div>
+        <div class="file-desc">
+          Página inicial do projeto. Menu de navegação para todas as seções
+          (App, Documentação, Features, etc)
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">HTML</span>index.html
+        </div>
+        <div class="file-desc">
+          Aplicação principal. Contém estrutura do editor, sidebar, toolbar e
+          inputs para import
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">HTML</span>about.html
+        </div>
+        <div class="file-desc">
+          Página informativa sobre o app. Mostra funcionalidades, guia de início
+          e atalhos
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">HTML</span>features.html
+        </div>
+        <div class="file-desc">
+          Página de features detalhadas com cards, comparação e guia visual de
+          uso
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">HTML</span>project-info.html
+        </div>
+        <div class="file-desc">
+          Este arquivo. Documentação da estrutura do projeto e descrição de cada
+          arquivo
+        </div>
+      </div>
+
+      <!-- CSS File -->
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">CSS</span>style.css (798 linhas)
+        </div>
+        <div class="file-desc">
+          Estilos CSS para toda aplicação. Inclui:<br />
+          • Variáveis CSS para temas (dark/light)<br />
+          • Flexbox layout (sidebar + editor)<br />
+          • Animações suaves<br />
+          • Toolbar e menu dropdown<br />
+          • Editor rico (contenteditable)
+        </div>
+      </div>
+
+      <!-- JavaScript Files -->
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">JavaScript</span>script.js (670+ linhas)
+        </div>
+        <div class="file-desc">
+          Lógica principal da aplicação. Contém:<br />
+          • Objeto app com métodos CRUD<br />
+          • localStorage persistência<br />
+          • Funções de import/export (TXT, PDF)<br />
+          • Sistema de temas (dark/light)<br />
+          • Atalhos de teclado<br />
+          • Formatação de texto (bold, italic, etc)<br />
+          • Gerador de PDF formatado
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">Node.js</span>server.js
+        </div>
+        <div class="file-desc">
+          Servidor HTTP local para servir arquivos estáticos. Usado em
+          desenvolvimento para testar a aplicação localmente (porta 8000)
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">Node.js</span>sync-server.js
+        </div>
+        <div class="file-desc">
+          Servidor de sincronização. Recebe dados de notas e:<br />
+          • Salva em notas-backup/notas.json<br />
+          • Exporta cada nota como .txt<br />
+          • Fornece endpoints de status<br />
+          Porta: 3456
+        </div>
+      </div>
+
+      <!-- Documentation -->
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">Markdown</span>README.md
+        </div>
+        <div class="file-desc">
+          Documentação completa do projeto. Includes:<br />
+          • Descrição geral<br />
+          • Lista de funcionalidades<br />
+          • Instruções de uso<br />
+          • Guia de sincronização<br />
+          • Troubleshooting
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">Markdown</span>CHANGELOG.md
+        </div>
+        <div class="file-desc">
+          Histórico de versões e mudanças. Documentação de:<br />
+          • v2.0.0 (PDF Import, Temas, Atalhos)<br />
+          • v1.0.0 (Release inicial)
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">Markdown</span>TESTING.md
+        </div>
+        <div class="file-desc">
+          Guia completo de testes manuais com:<br />
+          • Checklist para cada feature<br />
+          • Instruções de debug<br />
+          • Testes em diferentes navegadores
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">
+          <span class="file-type">JSON</span>package.json
+        </div>
+        <div class="file-desc">
+          Metadados do projeto npm. Define:<br />
+          • Nome e versão<br />
+          • Scripts (sync, start)<br />
+          • Keywords<br />
+          • Dependências
+        </div>
+      </div>
+
+      <h2><i class="fa-solid fa-screwdriver-wrench"></i> Tecnologias Utilizadas</h2>
+
+      <div class="file-item">
+        <div class="file-name">Frontend</div>
+        <div class="file-desc">
+          • HTML5 com contenteditable<br />
+          • CSS3 com Grid/Flexbox<br />
+          • JavaScript Vanilla (sem frameworks)<br />
+          • PDF.js (via CDN) para parsing de PDFs
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">Backend/Server</div>
+        <div class="file-desc">
+          • Node.js (v14+)<br />
+          • HTTP nativo (sem Express)<br />
+          • FileSystem API para backup
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">Storage</div>
+        <div class="file-desc">
+          • localStorage (navegador)<br />
+          • JSON file (servidor)
+        </div>
+      </div>
+
+      <h2><i class="fa-solid fa-chart-simple"></i> Estatísticas</h2>
+
+      <div class="file-item">
+        <div class="file-name">Linhas de Código</div>
+        <div class="file-desc">
+          • script.js: 670+ linhas<br />
+          • style.css: 798+ linhas<br />
+          • index.html: 196 linhas<br />
+          • About + Features: 400+ linhas<br />
+          <strong>Total: 2000+ linhas de código</strong>
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">Funcionalidades</div>
+        <div class="file-desc">
+          • 12 features principais<br />
+          • 4 atalhos de teclado<br />
+          • 3 categorias de notas<br />
+          • 2 temas disponíveis<br />
+          • 4 formatos de export/import
+        </div>
+      </div>
+
+      <h2><i class="fa-solid fa-rocket"></i> Como Começar</h2>
+
+      <div class="file-item">
+        <div class="file-name">1. Navegador</div>
+        <div class="file-desc">
+          Abra <code>http://localhost:8000/start.html</code><br />
+          (Após iniciar o servidor)
+        </div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">2. Servidor de Teste</div>
+        <div class="file-desc"><code>node server.js</code> porta 8000</div>
+      </div>
+
+      <div class="file-item">
+        <div class="file-name">3. Sincronização (Opcional)</div>
+        <div class="file-desc"><code>node sync-server.js</code> porta 3456</div>
+      </div>
+
+      <h2><i class="fa-solid fa-map"></i> Próximas Features (Roadmap)</h2>
+
+      <div class="file-item">
+        <div class="file-desc">
+          • v2.1: Cloud Sync (Google Drive, OneDrive)<br />
+          • v3.0: Colaboração (share notes, comments)<br />
+          • v3.1: Plugin system (extensões customizáveis)<br />
+          • v4.0: Mobile app (React Native)
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div
+        style="
+          margin-top: 60px;
+          padding-top: 30px;
+          border-top: 2px solid var(--border);
+          text-align: center;
+        "
+      >
+        <p style="color: var(--text-secondary); margin-bottom: 12px">
+          Desenvolvido por
+          <a
+            href="https://www.instagram.com/gabrielmenndess/"
+            target="_blank"
+            style="color: #e1306c; text-decoration: none"
+            >Gabriel Mendes</a
+          >
+        </p>
+        <p style="color: var(--text-muted); margin-bottom: 12px">
+          <a
+            href="https://www.linkedin.com/in/gabriel-mendes-bb5571264/"
+            target="_blank"
+            style="color: #0077b5; text-decoration: none; margin: 0 12px"
+            ><i class="fa-brands fa-linkedin"></i> LinkedIn</a
+          >
+          |
+          <a
+            href="https://github.com/GabrielMendessDev"
+            target="_blank"
+            style="color: var(--text-primary); text-decoration: none; margin: 0 12px"
+            ><i class="fa-brands fa-github"></i> GitHub</a
+          >
+          |
+          <a
+            href="creator.html"
+            style="color: #00d4ff; text-decoration: none; margin: 0 12px"
+            ><i class="fa-solid fa-code"></i> Conheça o Criador</a
+          >
+          |
+          <a
+            href="javascript:history.back()"
+            style="color: #00d4ff; text-decoration: none; margin: 0 12px"
+            ><i class="fa-solid fa-arrow-left"></i> Voltar</a
+          >
+        </p>
+        <p style="color: var(--text-muted); font-size: 12px">
+          © 2026 Brain Dump. Todos os direitos reservados.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
